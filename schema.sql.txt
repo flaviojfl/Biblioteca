@@ -1,0 +1,30 @@
+CREATE TABLE livro (
+    isbn VARCHAR(20) PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    autor VARCHAR(255) NOT NULL,
+    genero VARCHAR(100),
+    ano INT,
+    disponivel BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE usuario (
+    matricula VARCHAR(50) PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    tipo VARCHAR(50)
+);
+
+CREATE TABLE bibliotecario (
+    matricula VARCHAR(50) PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cargo VARCHAR(100)
+);
+
+CREATE TABLE emprestimo (
+    id SERIAL PRIMARY KEY,
+    livro_isbn VARCHAR(20) REFERENCES livro(isbn),
+    usuario_matricula VARCHAR(50) REFERENCES usuario(matricula),
+    data_emprestimo DATE NOT NULL,
+    data_devolucao_prevista DATE NOT NULL,
+    data_devolucao_real DATE,
+    status VARCHAR(50)
+);
